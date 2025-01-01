@@ -1,0 +1,64 @@
+using System;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        // API URL'si
+        string url = "https://localhost:5011/api/Servis/BilesikKutuk";
+
+        // Gönderilecek JSON verisi
+        var data = new
+        {
+            kullaniciAdi = "kullaniciAdiniz",
+            sifre = "Şifreniz",
+            kimlikNo = "123123123123",
+            dogumGun = 21,
+            dogumAy = 01,
+            dogumYil = 2003
+        };
+
+        // JSON'u serialize et
+        string jsonData = System.Text.Json.JsonSerializer.Serialize(data);
+
+        using (HttpClient client = new HttpClient())
+        {
+            // SSL doğrulamasını devre dışı bırakmak için
+            HttpClientHandler handler = new HttpClientHandler
+            {
+                ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true
+            };
+
+            client.Timeout = TimeSpan.FromSeconds(30); // İsteğin zaman aşımı süresi
+            using (HttpClient customClient = new HttpClient(handler))
+            {
+                try
+                {
+                    // İstek ayarları
+                    var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+
+                    // POST isteği gönder
+                    HttpResponseMessage response = await customClient.PostAsync(url, content);
+
+                    // Yanıt durumu ve içerik kontrolü
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string responseBody = await response.Content.ReadAsStringAsync();
+                        Console.WriteLine("Yanıt: " + responseBody);
+                    }
+                    else
+                    {
+                        Console.WriteLine($"HTTP Hatası: {response.StatusCode}");
+                    }
+                }
+                catch (HttpRequestException e)
+                {
+                    Console.WriteLine("İstek sırasında bir hata oluştu: " + e.Message);
+                }
+            }
+        }
+    }
+}
