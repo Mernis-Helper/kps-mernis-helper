@@ -1,0 +1,41 @@
+{
+  "info": {
+    "name": "API Servis Testi",
+    "_postman_id": "12345678-abcd-1234-abcd-1234567890ab",
+    "description": "API için POST sorgusu",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "BilesikKutuk POST",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"kullaniciAdi\": \"kullaniciAdiniz\",\n  \"sifre\": \"Şifreniz\",\n  \"kimlikNo\": \"123123123123\",\n  \"dogumGun\": 21,\n  \"dogumAy\": 1,\n  \"dogumYil\": 2003\n}"
+        },
+        "url": {
+          "raw": "https://localhost:5011/api/Servis/BilesikKutuk",
+          "protocol": "https",
+          "host": [
+            "localhost"
+          ],
+          "port": "5011",
+          "path": [
+            "api",
+            "Servis",
+            "BilesikKutuk"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
