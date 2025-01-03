@@ -7,6 +7,7 @@ kps hizmetlerini dışarıdan ücret ödemeden kullanabilirsiniz. 2025 yılına 
 # Kullanımı
   -Mernis dosyası içerisindeki uygulamayı sunucuda aktif hale getirin. ardından istediğiniz dilde aşağıdaki gibi post etmeniz yeterli olacaktır. örnekler incelenebilir.
    *** Headerda mutlaka "Content-Type": "application/json" gönderilmelidir.
+   !! servisler kpsden kullanıma izin verilen servisler için geçerlidir. bu sebeple kps üzerindeki servislerden isteğiniz olması halinde uygulamaya eklenir ve kps üzerinden aktif şekilde kullanabilirsiniz.
 
 ## Bileşik Kütük Sorgulama ##
 Json Post Edilmelidir
